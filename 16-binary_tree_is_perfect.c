@@ -1,28 +1,6 @@
 #include "binary_trees.h"
 
 /**
- * subtree_complete - function that checks if a node is a leaf
- *
- * @tree: is a pointer to the node to check
- *
- * Return: return 1 if the tree is coplete, otherwise 0
- */
-int subtree_complete(const binary_tree_t *tree)
-{
-	if (tree == NULL)
-		return (0);
-
-	if (tree->left != NULL && tree->right != NULL)
-		return (1 && subtree_complete(tree->left)
-			&& subtree_complete(tree->right));
-
-	if (tree->left == NULL && tree->right == NULL)
-		return (1);
-
-	return (subtree_complete(tree->left) && subtree_complete(tree->right));
-}
-
-/**
  * tree_height - function that creates a binary tree node
  *
  * @tree: is a pointer to the parent node of the node to create
@@ -48,12 +26,40 @@ int tree_height(const binary_tree_t *tree)
 	else
 		height_r = 0;
 
-	if (height_l == 0 && height_r == 0)
-		height_l = 1;
-
 	if (height_l > height_r)
 		return (height_l);
 	return (height_r);
+}
+
+/**
+ * tree_size - measures the size of a binary tree
+ * @tree: pointer to the root node of the tree to measure the size
+ * Return: size of a binary tree
+ * If tree is NULL, the function must return 0
+ **/
+
+int tree_size(const binary_tree_t *tree)
+{
+	if (tree == NULL)
+		return (0);
+
+	return (1 + tree_size(tree->left) + tree_size(tree->right));
+}
+
+/**
+ * _pow - function that returns the value of x
+ * raised to the power of y.
+ * @x: Base number.
+ * @y: Power number.
+ * Return: x raised to the power of y.
+ */
+int _pow(int x, int y)
+{
+	if (y < 0)
+		return (-1);
+	if (y == 0)
+		return (1);
+	return (x * _pow(x, y - 1));
 }
 
 /**
@@ -67,7 +73,5 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	if (tree == NULL)
 		return (0);
 
-	if (tree_height(tree->left) == tree_height(tree->right))
-		return (subtree_complete(tree));
-	return (0);
+	return (tree_size(tree) == (_pow(2, (tree_height(tree) + 1))) - 1);
 }
