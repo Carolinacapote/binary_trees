@@ -13,7 +13,8 @@ int subtree_complete(const binary_tree_t *tree)
 		return (0);
 
 	if (tree->left != NULL && tree->right != NULL)
-		return (1);
+		return (1 && subtree_complete(tree->left)
+			&& subtree_complete(tree->right));
 
 	if (tree->left == NULL && tree->right == NULL)
 		return (1);
