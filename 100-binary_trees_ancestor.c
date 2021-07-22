@@ -53,6 +53,9 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 	if (second->parent == first)
 		return ((binary_tree_t *)first);
 
+	if (first == second)
+		return ((binary_tree_t *)first);
+
 	if (tree_depth(first) > tree_depth(second))
 		return (binary_trees_ancestor(first->parent, second));
 
