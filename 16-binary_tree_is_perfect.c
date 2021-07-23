@@ -47,22 +47,6 @@ int tree_size(const binary_tree_t *tree)
 }
 
 /**
- * _pow - function that returns the value of x
- * raised to the power of y.
- * @x: Base number.
- * @y: Power number.
- * Return: x raised to the power of y.
- */
-int _pow(int x, int y)
-{
-	if (y < 0)
-		return (-1);
-	if (y == 0)
-		return (1);
-	return (x * _pow(x, y - 1));
-}
-
-/**
  * binary_tree_is_perfect - checks if a binary tree is perfect
  * @tree: pointer to the root node of the tree to check
  *
@@ -70,8 +54,11 @@ int _pow(int x, int y)
  */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
+	int pow_result = 0;
+
 	if (tree == NULL)
 		return (0);
 
-	return (tree_size(tree) == (_pow(2, (tree_height(tree) + 1))) - 1);
+	_pow(pow_result, 2, (tree_height(tree) + 1));
+	return (tree_size(tree) == pow_result - 1);
 }
