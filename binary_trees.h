@@ -109,4 +109,18 @@ int *heap_to_sorted_array(heap_t *heap, size_t *size);
 
 void binary_tree_print(const binary_tree_t *);
 
+/**
+ * _pow - Function that elevates a number "base" into "exp"
+ * @base: Number to be elevated
+ * @exp: exponent of the operation.
+ * @result: result of the operation.
+ */
+#define _pow(result, base, exp)\
+do {\
+	int i;\
+	result = 1;\
+	for (i = 0; i < exp; ++i)\
+		result *= base;\
+} while (0)
+
 #endif /* _BINARY_TREES_H_ */
